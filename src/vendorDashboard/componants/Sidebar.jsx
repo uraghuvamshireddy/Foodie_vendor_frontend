@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Sidebar = ({showFirmHandler,showProductHandler,showAllProductsHandler,title })=> {
+const Sidebar = ({showFirmHandler,showProductHandler,showAllProductsHandler,title,qrcodehandler })=> {
   return (
     <div className='sideBarSection'>
       <ul>
@@ -8,7 +8,7 @@ const Sidebar = ({showFirmHandler,showProductHandler,showAllProductsHandler,titl
         
         <li onClick={showProductHandler}>Add Product</li>
         <li onClick={showAllProductsHandler}>All Products</li>
-        <li>User Details</li>
+        <li onClick={qrcodehandler}>Generate QR code</li>
       </ul>
     </div>
   )

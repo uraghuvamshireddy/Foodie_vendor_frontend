@@ -7,6 +7,7 @@ import AddFirm from '../componants/forms/AddFirm'
 import AddProduct from '../componants/forms/AddProduct'
 import Welcome from '../componants/Welcome'
 import AllProducts from '../componants/AllProducts'
+import QRCodeGenerator from '../componants/Qrcode'
 
 
 function LandingPage() {
@@ -19,6 +20,7 @@ function LandingPage() {
   const [showAllProducts,setshowAllProducts] = useState(false);
   const [logout,setlogout] = useState(false);
   const [title,setTitle]=useState(true);
+  const [qrcode,setqrcode] = useState(false);
 
   useEffect(()=>{
     const loginToken = localStorage.getItem('loginToken')
@@ -49,6 +51,7 @@ const showLoginHandler = ()=>{
   setshowProduct(false)
   setshowWelcome(false)
   setshowAllProducts(false);
+  setqrcode(false);
 }
 const showRegisterHandler = ()=>{
   setshowRegister(true);
@@ -56,6 +59,7 @@ const showRegisterHandler = ()=>{
   setshowFirm(false);
   setshowProduct(false)
   setshowWelcome(false)
+  setqrcode(false);
   setshowAllProducts(false);
 }
 const showFirmHandler = ()=>{
@@ -66,6 +70,7 @@ const showFirmHandler = ()=>{
   setshowProduct(false)
   setshowWelcome(false)
   setshowAllProducts(false);
+  setqrcode(false);
   }
   else{
 alert('Please LOGIN');
@@ -80,6 +85,7 @@ const showProductHandler = ()=>{
   setshowRegister(false);
   setshowWelcome(false);
   setshowAllProducts(false);
+  setqrcode(false);
   }
   else{
     alert('Please LOGIN');
@@ -93,6 +99,7 @@ const showWelcomeHandler=()=>{
   setshowRegister(false);
   setshowWelcome(true)
   setshowAllProducts(false);
+  setqrcode(false);
 }
 
 const showAllProductsHandler = ()=>{
@@ -103,6 +110,22 @@ const showAllProductsHandler = ()=>{
   setshowRegister(false);
   setshowWelcome(false);
   setshowAllProducts(true);
+  setqrcode(false);
+  }
+  else{
+    alert('Please LOGIN');
+    setshowLogin(true);
+      }
+}
+const qrcodehandler = ()=>{
+  if(logout){
+  setshowLogin(false);
+  setshowFirm(false);
+  setshowProduct(false);
+  setshowRegister(false);
+  setshowWelcome(false);
+  setshowAllProducts(false);
+  setqrcode(true);
   }
   else{
     alert('Please LOGIN');
@@ -115,13 +138,14 @@ const showAllProductsHandler = ()=>{
     <Navbar showLoginHandler={showLoginHandler} showRegisterHandler={showRegisterHandler} logout = {logout} logoutHandler={logoutHandler} />
     
     <div className="collectionSection">
-    <Sidebar showFirmHandler={showFirmHandler} showProductHandler={showProductHandler}  showAllProductsHandler={showAllProductsHandler} title={title}/>
+    <Sidebar showFirmHandler={showFirmHandler} showProductHandler={showProductHandler}  showAllProductsHandler={showAllProductsHandler} title={title} qrcodehandler={qrcodehandler}/>
     {showLogin&&<Login showWelcomeHandler={showWelcomeHandler}/>}
     {showRegister&& <Register showLoginHandler={showLoginHandler}/> }
     {showFirm  && logout&& <AddFirm /> }
     {showProduct && logout && <AddProduct /> }
     {showWelcome && logout && <Welcome />}
     {showAllProducts  && logout&& <AllProducts />}
+    {qrcode && logout && <QRCodeGenerator/>}
     </div>
    </section>
    </>
