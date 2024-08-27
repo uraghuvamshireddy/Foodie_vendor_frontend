@@ -1,5 +1,4 @@
 
-import { NavLink } from 'react-router-dom';
 import React, { useState } from 'react';
 import QRCode from 'react-qr-code';
 // import htmlToImage from 'html-to-image';
@@ -12,18 +11,27 @@ function QrCodeGenerator() {
     setQrIsVisible(true);
   };
 
-  // const downloadQRCode = () => {
-  //   htmlToImage.toPng(document.getElementById('qr-code'))
-  //     .then((dataUrl) => {
-  //       const link = document.createElement('a');
-  //       link.href = dataUrl;
-  //       link.download = 'qrcode.png';
-  //       link.click();
-  //     });
+  // const downloadQRCodeById = async (qrCodeId) => {
+  //   const qrCodeImage = await fetchQRCodeImage(qrCodeId);
+
+  //   const blob = new Blob([qrCodeImage], { type: 'image/png' });
+
+  //   const url = URL.createObjectURL(blob);
+  
+  //   const aEl = document.createElement('a');
+  //   aEl.href = url;
+  //   aEl.download = `QR_Code_${qrCodeId}.png`; 
+  //   document.body.appendChild(aEl);
+  //   aEl.click();
+  //   document.body.removeChild(aEl);
+
+  //   URL.revokeObjectURL(url);
   // };
+  
+  
 const firmId=localStorage.getItem('firmId');
   return (
-    <div>
+    <div className='qr'>
       {/* <input
         type="text"
         placeholder="Enter URL"
@@ -31,14 +39,14 @@ const firmId=localStorage.getItem('firmId');
         onChange={(e) => setUrl(e.target.value)}
       /> */}
   {/* <NavLink to={`/${firmId}/menu`}>  */}
-   <button onClick={generateQRCode}>Generate QR Code</button>
+ <div className='gen'> <button onClick={generateQRCode}>Generate QR Code</button></div> 
    {/* </NavLink> */}
       {qrIsVisible && (
         <div id="qr-code">
                 {/* <QRCode value="localhost:5173/firmId/menu" /> */}
 
-          <QRCode value={`https://enchanting-manatee-dd5c07.netlify.app/${firmId}/menu`} />
-          {/* <button onClick={downloadQRCode}>Download QR Code</button> */}
+          <QRCode  id="qrCodeEl" value={`https://enchanting-manatee-dd5c07.netlify.app/${firmId}/menu`} />
+          {/* <button onClick={downloadQRCode()}>Download QR Code</button> */}
         </div>
       )}
     </div>

@@ -213,3 +213,29 @@ margin: 10px;
 .error h1{
     font-size: 4rem;
 }
+.qr{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center
+}
+.gen{
+    margin:0 600px;
+}
+
+.gen button{
+    background-color: #F46036;
+    border-radius: 10px;
+    height: 5vh; 
+     width: 100%;
+     font-size: bold;
+    display: flex;
+    justify-content: centre; 
+    align-items: center; 
+
+}
+
+#qrCodeEl{
+    margin: 15px 0px;
+}

@@ -3,7 +3,7 @@ import LandingPage from './vendorDashboard/pages/LandingPage'
 import { Route,Routes } from 'react-router-dom'
 import "./App.css"
 import NotFound from './vendorDashboard/componants/NotFound'
-import AllProducts from './vendorDashboard/componants/AllProducts'
+import Menu from './vendorDashboard/componants/Menu'
 
 function App() {
   // const firmID=localStorage.getItem("firmId")
@@ -12,7 +12,7 @@ function App() {
      
       <Routes>
         <Route path="/" element={<LandingPage/>}/>
-        <Route path="/:id/menu"  element={<AllProducts />}/>
+        <Route path="/:id/menu"  element={<Menu />}/>
         <Route path='/*' element={<NotFound/>}/>
       </Routes>
       {/* <LandingPage /> */}
