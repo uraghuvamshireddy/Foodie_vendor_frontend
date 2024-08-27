@@ -1,47 +1,50 @@
-import React, { useState } from 'react';
-import QRCode from 'qrcode.react';
 
-const QRCodeGenerator = () => {
-  const [inputText, setInputText] = useState('');
-  const [qrCodeText, setQRCodeText] = useState('');
+import { NavLink } from 'react-router-dom';
+import React, { useState } from 'react';
+import QRCode from 'react-qr-code';
+// import htmlToImage from 'html-to-image';
+
+function QrCodeGenerator() {
+  const [url, setUrl] = useState('');
+  const [qrIsVisible, setQrIsVisible] = useState(false);
 
   const generateQRCode = () => {
-    setQRCodeText(inputText);
+    setQrIsVisible(true);
   };
 
-  const downloadQRCode = () => {
-    const canvas = document.getElementById('qrCodeEl');
-    const pngUrl = canvas
-      .toDataURL('image/png')
-      .replace('image/png', 'image/octet-stream');
-    let downloadLink = document.createElement('a');
-    downloadLink.href = pngUrl;
-    downloadLink.download = 'qr_code.png';
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-  };
-
+  // const downloadQRCode = () => {
+  //   htmlToImage.toPng(document.getElementById('qr-code'))
+  //     .then((dataUrl) => {
+  //       const link = document.createElement('a');
+  //       link.href = dataUrl;
+  //       link.download = 'qrcode.png';
+  //       link.click();
+  //     });
+  // };
+const firmId=localStorage.getItem('firmId');
   return (
     <div>
-      <h3>Generate and Download QR Code</h3>
-      <input
+      {/* <input
         type="text"
-        placeholder="Enter text"
-        value={inputText}
-        onChange={(e) => setInputText(e.target.value)}
-      />
-      <button onClick={generateQRCode}>Generate QR Code</button>
-      <br />
-      {qrCodeText && (
-        <>
-          <QRCode id="qrCodeEl" value={qrCodeText} size={150} />
-          <br />
-          <button onClick={downloadQRCode}>Download QR Code</button>
-        </>
+        placeholder="Enter URL"
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
+      /> */}
+  {/* <NavLink to={`/${firmId}/menu`}>  */}
+   <button onClick={generateQRCode}>Generate QR Code</button>
+   {/* </NavLink> */}
+      {qrIsVisible && (
+        <div id="qr-code">
+                {/* <QRCode value="localhost:5173/firmId/menu" /> */}
+
+          <QRCode value="https://enchanting-manatee-dd5c07.netlify.app/firmId/menu" />
+          {/* <button onClick={downloadQRCode}>Download QR Code</button> */}
+        </div>
       )}
     </div>
   );
-};
+}
 
-export default QRCodeGenerator;
+export default QrCodeGenerator;
+
+
