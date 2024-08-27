@@ -37,7 +37,7 @@ const firmId=localStorage.getItem('firmId');
         <div id="qr-code">
                 {/* <QRCode value="localhost:5173/firmId/menu" /> */}
 
-          <QRCode value="https://enchanting-manatee-dd5c07.netlify.app/firmId/menu" />
+          <QRCode value={`https://enchanting-manatee-dd5c07.netlify.app/${firmId}/menu`} />
           {/* <button onClick={downloadQRCode}>Download QR Code</button> */}
         </div>
       )}
