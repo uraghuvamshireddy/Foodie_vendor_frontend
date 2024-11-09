@@ -4,6 +4,7 @@ import { Route,Routes } from 'react-router-dom'
 import "./App.css"
 import NotFound from './vendorDashboard/componants/NotFound'
 import Menu from './vendorDashboard/componants/Menu'
+import  Usercart  from './cart/Usercart'
 
 function App() {
   // const firmID=localStorage.getItem("firmId")
@@ -12,6 +13,7 @@ function App() {
      
       <Routes>
         <Route path="/" element={<LandingPage/>}/>
+        <Route path='/:id/menu/cart' element={<Usercart />} />
         <Route path="/:id/menu"  element={<Menu />}/>
         <Route path='/*' element={<NotFound/>}/>
       </Routes>
