@@ -4,29 +4,23 @@ import { useCart } from './Cartcontext';
 function Usercart() {
   const { cartItems, addToCart, removeFromCart } = useCart();
 
-  // Handling quantity change
   const handleQuantityChange = (item, quantity) => {
-    // If quantity is 0 or negative, remove the item from the cart
     if (quantity <= 0) {
       removeFromCart(item);
     } else {
-      // Check if the item already exists in the cart
       const existingItem = cartItems.find(cartItem => cartItem._id === item._id);
 
       if (existingItem) {
-        // If it exists, update the quantity
         addToCart({ ...existingItem, quantity });
       } else {
-        // If it doesn't exist, add it as a new item
         addToCart({ ...item, quantity });
       }
     }
   };
 
-  // Calculate total price of all items in the cart
   const calculateTotalPrice = () => {
     return cartItems.reduce((total, item) => {
-      return total + (item.price * (item.quantity || 1)); // Multiply price by quantity
+      return total + (item.price * (item.quantity || 1)); 
     }, 0);
   };
 
