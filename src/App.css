@@ -350,7 +350,7 @@ margin: 10px;
     border: 1px solid #ddd;
   }
   
-  .remove-btn button {
+  .order-btn,.remove-btn button {
     background-color: #ff4c4c;
     color: white;
     border: none;
@@ -360,7 +360,7 @@ margin: 10px;
     font-size: 0.9rem;
   }
   
-  .remove-btn button:hover {
+  .order-btn,.remove-btn button:hover {
     background-color: #e60000;
   }
   
@@ -384,3 +384,58 @@ margin: 10px;
     color: rgb(197, 179, 179);
     padding-left: 8px;
   }
+
+  .cart-container {
+    position: relative;
+  }
+  
+  .order-details-form {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .form-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .order-details-form form label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .order-details-form input,
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .order-details-form button {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100%;
+  }
+  
+  .button:hover {
+    background-color: #45a049;
+  }
+  
+  
