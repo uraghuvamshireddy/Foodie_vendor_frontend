@@ -209,6 +209,7 @@ function Usercart() {
                     <option value="">Select Delivery Type</option>
                     <option value="delivery">Delivery</option>
                     <option value="pickup">Pickup</option>
+                    <option value="upi">UPI</option>
                   </select>
                 </label>
                 <label>
@@ -230,6 +231,7 @@ function Usercart() {
                     <option value="">Select Payment Option</option>
                     <option value="cash">Cash</option>
                     <option value="card">Card</option>
+                    <option value="pickup">Pickup</option>
                   </select>
                 </label>
                 <button onClick={handleSubmitOrder}>Submit Order</button>
