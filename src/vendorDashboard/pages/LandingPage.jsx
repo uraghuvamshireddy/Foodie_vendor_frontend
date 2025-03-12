@@ -8,6 +8,9 @@ import AddProduct from '../componants/forms/AddProduct'
 import Welcome from '../componants/Welcome'
 import AllProducts from '../componants/AllProducts'
 import QRCodeGenerator from '../componants/Qrcode'
+import Order from '../componants/Order'
+import { use } from 'react'
+import ComOrder from '../componants/ComOrder'
 
 
 function LandingPage() {
@@ -21,6 +24,8 @@ function LandingPage() {
   const [logout,setlogout] = useState(false);
   const [title,setTitle]=useState(true);
   const [qrcode,setqrcode] = useState(false);
+  const [viewOrder,setviewOrder] = useState(false);
+  const [comOrder, setcomOrder] = useState(false);
 
   useEffect(()=>{
     const loginToken = localStorage.getItem('loginToken')
@@ -52,6 +57,8 @@ const showLoginHandler = ()=>{
   setshowWelcome(false)
   setshowAllProducts(false);
   setqrcode(false);
+  setviewOrder(false);
+  setcomOrder(false);
 }
 const showRegisterHandler = ()=>{
   setshowRegister(true);
@@ -60,6 +67,8 @@ const showRegisterHandler = ()=>{
   setshowProduct(false)
   setshowWelcome(false)
   setqrcode(false);
+  setviewOrder(false);
+  setcomOrder(false);
   setshowAllProducts(false);
 }
 const showFirmHandler = ()=>{
@@ -71,6 +80,8 @@ const showFirmHandler = ()=>{
   setshowWelcome(false)
   setshowAllProducts(false);
   setqrcode(false);
+  setviewOrder(false);
+  setcomOrder(false);
   }
   else{
 alert('Please LOGIN');
@@ -86,6 +97,8 @@ const showProductHandler = ()=>{
   setshowWelcome(false);
   setshowAllProducts(false);
   setqrcode(false);
+  setviewOrder(false);
+  setcomOrder(false);
   }
   else{
     alert('Please LOGIN');
@@ -100,6 +113,8 @@ const showWelcomeHandler=()=>{
   setshowWelcome(true)
   setshowAllProducts(false);
   setqrcode(false);
+  setviewOrder(false);
+  setcomOrder(false);
 }
 
 const showAllProductsHandler = ()=>{
@@ -111,6 +126,8 @@ const showAllProductsHandler = ()=>{
   setshowWelcome(false);
   setshowAllProducts(true);
   setqrcode(false);
+  setviewOrder(false);
+  setcomOrder(false);
   }
   else{
     alert('Please LOGIN');
@@ -125,7 +142,43 @@ const qrcodehandler = ()=>{
   setshowRegister(false);
   setshowWelcome(false);
   setshowAllProducts(false);
+  setviewOrder(false);
+  setcomOrder(false);
   setqrcode(true);
+  }
+  else{
+    alert('Please LOGIN');
+    setshowLogin(true);
+      }
+}
+const orderhandler = ()=>{
+  if(logout){
+  setshowLogin(false);
+  setshowFirm(false);
+  setshowProduct(false);
+  setshowRegister(false);
+  setshowWelcome(false);
+  setshowAllProducts(false);
+  setviewOrder(true);
+  setqrcode(false);
+  setcomOrder(false);
+  }
+  else{
+    alert('Please LOGIN');
+    setshowLogin(true);
+      }
+}
+const comorderhandler = ()=>{
+  if(logout){
+  setshowLogin(false);
+  setshowFirm(false);
+  setshowProduct(false);
+  setshowRegister(false);
+  setshowWelcome(false);
+  setshowAllProducts(false);
+  setviewOrder(false);
+  setqrcode(false);
+  setcomOrder(true);
   }
   else{
     alert('Please LOGIN');
@@ -138,7 +191,7 @@ const qrcodehandler = ()=>{
     <Navbar showLoginHandler={showLoginHandler} showRegisterHandler={showRegisterHandler} logout = {logout} logoutHandler={logoutHandler} />
     
     <div className="collectionSection">
-    <Sidebar showFirmHandler={showFirmHandler} showProductHandler={showProductHandler}  showAllProductsHandler={showAllProductsHandler} title={title} qrcodehandler={qrcodehandler}/>
+    <Sidebar showFirmHandler={showFirmHandler} showProductHandler={showProductHandler}  showAllProductsHandler={showAllProductsHandler} title={title} qrcodehandler={qrcodehandler} orderhandler={orderhandler} comorderhandler={comorderhandler}/>
     {showLogin&&<Login showWelcomeHandler={showWelcomeHandler}/>}
     {showRegister&& <Register showLoginHandler={showLoginHandler}/> }
     {showFirm  && logout&& <AddFirm /> }
@@ -146,6 +199,8 @@ const qrcodehandler = ()=>{
     {showWelcome && logout && <Welcome />}
     {showAllProducts  && logout&& <AllProducts />}
     {qrcode && logout && <QRCodeGenerator/>}
+    {viewOrder && logout && <Order />}
+    {comOrder && logout && <ComOrder />}
     </div>
    </section>
    </>
