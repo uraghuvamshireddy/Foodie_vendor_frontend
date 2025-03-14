@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { API_URL } from '../data/apipath';
+import { useParams } from "react-router-dom";
 import { useCart } from '../../cart/Cartcontext';
 import { NavLink } from 'react-router-dom';
 
 const Menu = () => {
+  const { firmId } = useParams();
   const [products, setProducts] = useState([]);
   const {addToCart,cartItems} = useCart()
   const fid = localStorage.getItem('firmId');
   const productsHandler = async () => {
-    const firmId = localStorage.getItem('firmId');
+    // const firmId = localStorage.getItem('firmId');
     console.log('Fetching products for firmId:', firmId);
     try {
       const response = await fetch(`${API_URL}/product/${firmId}/products`);
