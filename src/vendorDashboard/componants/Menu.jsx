@@ -8,7 +8,7 @@ const Menu = () => {
   const { firmId } = useParams();
   const [products, setProducts] = useState([]);
   const {addToCart,cartItems} = useCart()
-  const fid = localStorage.getItem('firmId');
+  // const fid = localStorage.getItem('firmId');
   const productsHandler = async () => {
     // const firmId = localStorage.getItem('firmId');
     console.log('Fetching products for firmId:', firmId);
@@ -47,7 +47,7 @@ const Menu = () => {
     <div className="menu-container">
      <div className="">
      <h2 className="name">{firmName}</h2>
-     <NavLink to={`/${fid}/menu/cart`}>
+     <NavLink to={`/${firmId}/menu/cart`}>
   <div className="cart">Items Added</div>
 </NavLink>
      </div>
