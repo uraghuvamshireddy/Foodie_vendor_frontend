@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 const Menu = () => {
   const { id } = useParams();
   const [products, setProducts] = useState([]);
+  const[firmName,setfirmName] = useState("");
   const {addToCart,cartItems} = useCart()
   console.log(id)
   const productsHandler = async () => {
@@ -15,6 +16,9 @@ const Menu = () => {
       const response = await fetch(`${API_URL}/product/${id}/products`);
       const newProductsData = await response.json();
       console.log('Fetched products:', newProductsData); 
+      if(newProductsData && newProductsData.restaurentName){
+        setfirmName(newProductsData.restaurentName);
+      }
       if (newProductsData && newProductsData.products) {
         setProducts(newProductsData.products); 
       } else {
@@ -31,8 +35,8 @@ const Menu = () => {
     console.log('useEffect triggered');
   }, []);
 
-  const firmName = localStorage.getItem('firmName');
-  console.log('Firm Name:', firmName);
+localStorage.setItem('firmname',firmName); 
+
 
   const vegProducts = products.filter(item => 
    item.category.includes('veg')
@@ -47,7 +51,10 @@ const Menu = () => {
      <div className="">
      <h2 className="name">{firmName}</h2>
      <NavLink to={`/${id}/menu/cart`}>
-  <div className="cart">Items Added</div>
+     <button style={{ color: "black", backgroundColor: "white", border: "1px solid black", padding: "10px 15px", borderRadius: "5px", cursor: "pointer" }}>
+  Items Added
+</button>
+
 </NavLink>
      </div>
 

@@ -44,31 +44,55 @@ function Usercart() {
     });
   };
 
-  const generatePDF = () => {
+  const generatePDF = (orderDetails) => {
     const doc = new jsPDF();
-    const firmName = localStorage.getItem('firmName');
-    const totalPrice = calculateTotalPrice();
+    const firmName = localStorage.getItem('firmname');
+    console.log(firmName);
+    const { name, phoneNumber, deliveryType, addressorTable, paymentOption, items, totalPrice } = orderDetails;
+
     const date = new Date().toLocaleString();
     
+    doc.setFontSize(14);
     doc.text(`Firm: ${firmName}`, 10, 10);
     doc.text(`Date: ${date}`, 10, 20);
-    doc.text(`Name: ${personalDetails.name}`, 10, 30);
-    doc.text(`Phone: ${personalDetails.phoneNumber}`, 10, 40);
-    doc.text(`Delivery Type: ${personalDetails.deliveryType}`, 10, 50);
-    doc.text(`Address/Table: ${personalDetails.addressorTable}`, 10, 60);
-    doc.text(`Payment: ${personalDetails.paymentOption}`, 10, 70);
+    doc.text(`Name: ${name}`, 10, 30);
+    doc.text(`Phone: ${phoneNumber}`, 10, 40);
+    doc.text(`Delivery Type: ${deliveryType}`, 10, 50);
+    doc.text(`Address/Table: ${addressorTable}`, 10, 60);
+    doc.text(`Payment: ${paymentOption}`, 10, 70);
 
-    doc.text('Items:', 10, 80);
-    cartItems.forEach(item => {
-      const { productName, price, quantity } = item;
-      doc.text(`${productName} (x${quantity}) - ₹${price * quantity}`, 10, 30);
-      
-    });
+    doc.setFontSize(12);
+    doc.text("Items Ordered:", 10, 80);
+    let y = 90;  
 
-    doc.text(`Total Price: ₹${totalPrice.toFixed(2)}`, 10, 100 + cartItems.length * 10);
+    doc.setFontSize(10);
+    doc.text("Item Name", 10, y);
+    doc.text("Qty", 80, y);
+    doc.text("Price", 120, y);
+    doc.text("Total", 160, y);
+    doc.line(10, y + 2, 200, y + 2);  
+    y += 10;
+
+    items.forEach((item) => {
+      const { productName, price } = item;
+      const quantity = item.quantity || 1;  
+      const totalItemPrice = price * quantity;
+  
+      doc.text(productName, 10, y);
+      doc.text(quantity.toString(), 80, y);
+      doc.text(`₹${price}`, 120, y);
+      doc.text(`₹${totalItemPrice}`, 160, y);
+      y += 10;
+  });
+
+    doc.line(10, y, 200, y);
+    y += 10;
+
+    doc.text(`Total Price: ₹${totalPrice.toFixed(2)}`, 10, y);
 
     doc.save(`Bill-${date}.pdf`);
-  };
+};
+
 
   const handleSubmitOrder = async () => {
 
@@ -96,7 +120,7 @@ function Usercart() {
 
       if (response.ok) {
         alert('Order placed successfully!');
-        generatePDF();
+        generatePDF(orderDetails);
         setPersonalDetails({
           name: '',
           phoneNumber: '',
