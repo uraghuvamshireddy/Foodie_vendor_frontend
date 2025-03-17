@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { useCart } from './Cartcontext';
 import { API_URL } from '../vendorDashboard/data/apipath';
 import { jsPDF } from 'jspdf';
+import { useParams } from 'react-router-dom';
 
 function Usercart() {
+  const {id} = useParams();
   const { cartItems, addToCart, removeFromCart } = useCart();
   const [showDetailsForm, setShowDetailsForm] = useState(false);
   const [personalDetails, setPersonalDetails] = useState({
@@ -69,10 +71,8 @@ function Usercart() {
   };
 
   const handleSubmitOrder = async () => {
-    const loginToken = localStorage.getItem('loginToken');
-    const firmId = localStorage.getItem('firmId');
 
-    if (!loginToken || !firmId) {
+    if (!id) {
       console.error("user not authenticated");
       return;
     }
@@ -84,7 +84,7 @@ function Usercart() {
     };
 
     try {
-      const response = await fetch(`${API_URL}/order/add-order/${firmId}`, {
+      const response = await fetch(`${API_URL}/order/add-order/${id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

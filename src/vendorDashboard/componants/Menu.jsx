@@ -5,15 +5,14 @@ import { useCart } from '../../cart/Cartcontext';
 import { NavLink } from 'react-router-dom';
 
 const Menu = () => {
-  const { firmId } = useParams();
+  const { id } = useParams();
   const [products, setProducts] = useState([]);
   const {addToCart,cartItems} = useCart()
-  // const fid = localStorage.getItem('firmId');
+  console.log(id)
   const productsHandler = async () => {
-    // const firmId = localStorage.getItem('firmId');
-    console.log('Fetching products for firmId:', firmId);
+    console.log('Fetching products for id:', id);
     try {
-      const response = await fetch(`${API_URL}/product/${firmId}/products`);
+      const response = await fetch(`${API_URL}/product/${id}/products`);
       const newProductsData = await response.json();
       console.log('Fetched products:', newProductsData); 
       if (newProductsData && newProductsData.products) {
@@ -47,7 +46,7 @@ const Menu = () => {
     <div className="menu-container">
      <div className="">
      <h2 className="name">{firmName}</h2>
-     <NavLink to={`/${firmId}/menu/cart`}>
+     <NavLink to={`/${id}/menu/cart`}>
   <div className="cart">Items Added</div>
 </NavLink>
      </div>
