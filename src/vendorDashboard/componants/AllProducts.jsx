@@ -22,65 +22,59 @@ const AllProducts = () => {
         console.log('this is useEffect')
     },[])
 
-    const deleteProductById = async(productId)=>{
-                try {
-                        const response = await fetch(`${API_URL}/product/${productId}`,{
-                            method: 'DELETE'
-                        })
-                    if(response.ok){
-                        setProducts(products.filter(product =>product._id !== productId));
-                        confirm("are you sure, you want to delete?")
-                        alert("Product deleted Successfully")
-                    }
-                } catch (error) {
-                    console.error('Failed to delete product');
-                    alert('Failed to delete product')
-                }
-    }
+     const vegProducts = products.filter(item => item.category.includes('veg'));
+      const nonVegProducts = products.filter(item => item.category.includes('non-veg'));
+    
+     
+
+      const deleteProductById = async (productId) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete?");
+        if (!confirmDelete) return;
+      
+        try {
+          const response = await fetch(`${API_URL}/product/${productId}`, {
+            method: 'DELETE',
+          });
+      
+          if (response.ok) {
+            setProducts(prev => prev.filter(product => product._id !== productId));
+            await productsHandler();
+            alert("Product deleted successfully");
+          } else {
+            alert("Failed to delete product");
+            console.error('Delete request failed with status:', response.status);
+          }
+        } catch (error) {
+          console.error('Failed to delete product:', error);
+          alert('Failed to delete product');
+        }
+      };
+      
+    const renderCard = (item) => (
+        <div key={item._id} className="card">
+          <img src={`${API_URL}/uploads/${item.image}`} alt={item.productName} className="card-img" />
+          <div className="card-content">
+            <h4>{item.productName}</h4>
+            <p>₹{item.price}</p>
+            <button onClick={() => deleteProductById(item._id)}>Delete</button>
+          </div>
+        </div>
+      );
 
     
   return (
-    <div className='productSection'>
-        {products.length===0 ? (
-            <p>No products added</p>
-        ) : (
-            <table className="product-table">
-                <thead>
-                    <tr>
-                        <th>Product Name</th>
-                        <th>Price</th>
-                        <th>Image</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {products.map((item)=>{
-                            return (
-                                <>
-                                    <tr key={item._id}>
-                                        <td>{item.productName}</td>
-                                        <td>₹{item.price}</td>
-                                    <td>
-                                        {item.image && (
-                                            <img src={`${API_URL}/uploads/${item.image}`} 
-                                            alt={item.productName}
-                                            style={{ width: '50px', height:'50px'  }}
-                                            />
-                                        )}
-                                    </td>
-                                    <td>
-                                        <button onClick={()=>deleteProductById(item._id)}
-                                        className='deleteBtn'
-                                        >Delete</button>
-                                    </td>
-                                    </tr>
-                                </>
-                            )
-                    })}
-                </tbody>
-            </table>
-         )}
-    </div>
+    <div className="">
+   
+         <h3>Veg Items</h3>
+         <div className="card-grid">
+           {vegProducts.length > 0 ? vegProducts.map(renderCard) : <p>No veg products available</p>}
+         </div>
+   
+         <h3>Non-Veg Items</h3>
+         <div className="card-grid">
+           {nonVegProducts.length > 0 ? nonVegProducts.map(renderCard) : <p>No non-veg products available</p>}
+         </div>
+       </div>
   )
 }
 
