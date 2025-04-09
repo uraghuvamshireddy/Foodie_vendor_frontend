@@ -1,29 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { API_URL } from '../data/apipath';
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import { useCart } from '../../cart/Cartcontext';
-import { NavLink } from 'react-router-dom';
 
 const Menu = () => {
   const { id } = useParams();
   const [products, setProducts] = useState([]);
-  const[firmName,setfirmName] = useState("");
-  const {addToCart,cartItems} = useCart()
-  console.log(id)
+  const [firmName, setfirmName] = useState("");
+  const { addToCart } = useCart();
+
   const productsHandler = async () => {
-    console.log('Fetching products for id:', id);
     try {
       const response = await fetch(`${API_URL}/product/${id}/products`);
       const newProductsData = await response.json();
-      console.log('Fetched products:', newProductsData); 
-      if(newProductsData && newProductsData.restaurentName){
-        setfirmName(newProductsData.restaurentName);
-      }
-      if (newProductsData && newProductsData.products) {
-        setProducts(newProductsData.products); 
-      } else {
-        console.error('No products data found.');
-      }
+      if (newProductsData?.restaurentName) setfirmName(newProductsData.restaurentName);
+      if (newProductsData?.products) setProducts(newProductsData.products);
     } catch (error) {
       console.error('Failed to fetch products', error);
       alert('Failed to fetch products');
@@ -32,105 +23,42 @@ const Menu = () => {
 
   useEffect(() => {
     productsHandler();
-    console.log('useEffect triggered');
   }, []);
 
-localStorage.setItem('firmname',firmName); 
+  localStorage.setItem('firmname', firmName);
 
+  const vegProducts = products.filter(item => item.category.includes('veg'));
+  const nonVegProducts = products.filter(item => item.category.includes('non-veg'));
 
-  const vegProducts = products.filter(item => 
-   item.category.includes('veg')
-  );
-  
-  const nonVegProducts = products.filter(item => 
-  item.category.includes('non-veg')
+  const renderCard = (item) => (
+    <div key={item._id} className="card">
+      <img src={`${API_URL}/uploads/${item.image}`} alt={item.productName} className="card-img" />
+      <div className="card-content">
+        <h4>{item.productName}</h4>
+        <p>₹{item.price}</p>
+        <button onClick={() => addToCart(item)}>Add</button>
+      </div>
+    </div>
   );
 
   return (
     <div className="menu-container">
-     <div className="">
-     <h2 className="name">{firmName}</h2>
-     <NavLink to={`/${id}/menu/cart`}>
-     <button style={{ color: "black", backgroundColor: "white", border: "1px solid black", padding: "10px 15px", borderRadius: "5px", cursor: "pointer" }}>
-  Items Added
-</button>
+      <div className="menu-header">
+        <h2>{firmName}</h2>
+        <NavLink to={`/${id}/menu/cart`}>
+          <button className="cart-button">Items Added</button>
+        </NavLink>
+      </div>
 
-</NavLink>
-     </div>
+      <h3>Veg Items</h3>
+      <div className="card-grid">
+        {vegProducts.length > 0 ? vegProducts.map(renderCard) : <p>No veg products available</p>}
+      </div>
 
-      {/* Veg Table */}
-      {vegProducts.length === 0 ? (
-        <p className="no-products">No veg products available</p>
-      ) : (
-        <table className="product-table">
-          <thead>
-            <tr>
-              <th>Veg Product Name</th>
-              <th>Price</th>
-              <th>Image</th>
-              <th>Order</th>
-            </tr>
-          </thead>
-          <tbody>
-            {vegProducts.map((item) => {
-              console.log('Veg Item Category:', item.category);
-              return (
-                <tr key={item._id}>
-                  <td className="product-name">{item.productName}</td>
-                  <td className="product-price">₹{item.price}</td>
-                  <td className="product-image">
-                    {item.image && (
-                      <img
-                        src={`${API_URL}/uploads/${item.image}`}
-                        alt={item.productName}
-                        className="product-img"
-                      />
-                    )}
-                  </td>
-                  <td><button onClick={()=>addToCart(item)}>Add</button></td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      )}
-
-      {/* Non-Veg Table */}
-      {nonVegProducts.length === 0 ? (
-        <p className="no-products">No non-veg products available</p>
-      ) : (
-        <table className="product-table">
-          <thead>
-            <tr>
-              <th>Non-Veg Product Name</th>
-              <th>Price</th>
-              <th>Image</th>
-              <th>Order</th>
-            </tr>
-          </thead>
-          <tbody>
-            {nonVegProducts.map((item) => {
-              console.log('Non-Veg Item Category:', item.category);
-              return (
-                <tr key={item._id}>
-                  <td className="product-name">{item.productName}</td>
-                  <td className="product-price">₹{item.price}</td>
-                  <td className="product-image">
-                    {item.image && (
-                      <img
-                        src={`${API_URL}/uploads/${item.image}`}
-                        alt={item.productName}
-                        className="product-img"
-                      />
-                    )}
-                  </td>
-                  <td><button onClick={()=>addToCart(item)}>Add</button></td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      )}
+      <h3>Non-Veg Items</h3>
+      <div className="card-grid">
+        {nonVegProducts.length > 0 ? nonVegProducts.map(renderCard) : <p>No non-veg products available</p>}
+      </div>
     </div>
   );
 };
