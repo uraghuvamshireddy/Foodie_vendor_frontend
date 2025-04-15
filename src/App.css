@@ -1,10 +1,13 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&family=Comme:wght@100..900&family=Hind+Guntur:wght@300;400;500;600;700&display=swap');
+html, body {
+  height: 100%;
+}
+
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* font-family: "Roboto Condensed", sans-serif; */
     font-family: "Comme", sans-serif;
 }
 
@@ -12,7 +15,6 @@ body {
     height: 80px;
     display: flex;
     justify-content: space-between;
-    /* background-color: rgb(54, 52, 180); */
     background-color: #F46036;
     align-items: center;
     color: white;
@@ -20,11 +22,7 @@ body {
     font-size: large;
 }
 
-.userAuth {
-    cursor: pointer;
-}
-
-.logout {
+.userAuth, .logout {
     cursor: pointer;
 }
 
@@ -33,7 +31,6 @@ body {
     max-width: 15%;
     height: 95vh;
     padding-top: 10px;
-    /* background-color: lightgray; */
     background-color: #2E294E;
     color: white;
 }
@@ -50,8 +47,7 @@ body {
     display: flex;
 }
 
-
-.loginSection {
+.loginSection, .registerSection, .firmSection {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -59,24 +55,9 @@ body {
     align-items: center;
 }
 
-.registerSection {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.authForm label {
-    width: 100%;
-    max-width: 55%;
-    font-weight: 400;
-}
-
-.authForm {
+.authForm, .tableForm {
     width: 100%;
     max-width: 50%;
-    margin-top: -230px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -86,12 +67,80 @@ body {
     position: relative;
 }
 
-.authForm input {
+.authForm {
+    margin-top: -230px;
+}
+
+.tableForm {
+    margin-top: -100px;
+    box-shadow: 10px 10px rgba(0, 0, 0, 0.523);
+}
+
+.authForm label, .tableForm label {
     width: 100%;
     max-width: 55%;
-    height: 1.4rem;
+    font-weight: 400;
+}
+
+.authForm input, .tableForm input {
+    width: 100%;
+    max-width: 55%;
     height: 2rem;
     font-size: medium;
+}
+
+.tableForm input {
+    max-width: 85%;
+    height: 1.5rem;
+}
+
+.tableForm label {
+    max-width: 85%;
+    font-weight: 500;
+}
+
+.checkInp {
+    width: 100%;
+    max-width: 85%;
+    display: flex;
+}
+
+.checkInp label {
+    width: 20%;
+}
+
+.inputsContainer {
+    display: flex;
+    width: 100%;
+    margin: 10px;
+}
+
+.checkboxContainer {
+    display: flex;
+    width: 100%;
+    max-width: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkboxContainer label {
+    width: 100%;
+}
+
+.checkboxContainer input {
+    margin-left: -220px;
+}
+
+.regboxContainer {
+    display: flex;
+    width: 100%;
+    max-width: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+.regboxContainer label {
+    font-size: small;
 }
 
 .btnSubmit button {
@@ -103,106 +152,28 @@ body {
     border-radius: 5px;
 }
 
-.firmSection {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.tableForm{
-    width: 100%;
-    max-width: 50%;
-    margin-top: -100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    border: 1px solid gray;
-    border-radius: 10px;
-    position: relative;
-    box-shadow: 10px 10px rgba(0, 0, 0, 0.523);
-}
-.tableForm input {
-    width: 100%;
-    max-width: 85%;
-    height: 1.5rem;
-    /* height: 2rem; */
-    font-size: medium;
-}
-.tableForm label {
-    width: 100%;
-    max-width: 85%;
-    font-weight: 500;
-}
-
-.checkInp{
-    width: 100%;
-    max-width: 85%;
-    display: flex;
-}
-
-.inputsContainer{
-display: flex;
-width: 100%;
-margin: 10px;
-}
-
-.checkInp label{
-    width: 20%;
-  }
-
-.checkboxContainer{
- display: flex;
- width: 100%;
- max-width: 50%;
- justify-content: center;
- align-items: center;
-}
-
-.checkboxContainer label{
-    width: 100%;
-}
-
-.checkboxContainer input{
-    margin-left: -220px;
-}
-
-.regboxContainer{
-    display: flex;
-    width: 100%;
-    max-width: 50%;
-    justify-content: center;
-    align-items: center;
-   }
-.regboxContainer label{
-    font-size: small;
-}
-
 .menu-container {
-    background-image: url('https://i.pinimg.com/originals/07/f3/e4/07f3e434ed23348431503b61538c4831.jpg');
-    background-size: cover;
-    background-position: center center;
-    background-attachment: scroll;
-    background-repeat: no-repeat;
-    padding: 20px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-  }
-  
-  .menu-container h2.name {
+  background-image: url('https://i.pinimg.com/originals/07/f3/e4/07f3e434ed23348431503b61538c4831.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  overflow-y: auto;
+  padding: 0;
+  margin: 0;
+}
+
+
+.menu-container h2.name {
     color: white;
     text-align: center;
     font-size: 2rem;
     font-weight: bold;
     z-index: 10;
-  }
-  
-  .product-table {
+}
+
+.product-table {
     margin-top: 20px;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 8px;
@@ -212,52 +183,37 @@ margin: 10px;
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
-  }
-  
-  .product-table th,
-  .product-table td {
+    overflow-x: auto;
+}
+
+.product-table th, .product-table td {
     padding: 12px;
     text-align: left;
-  }
-  .product-img {
+}
+
+.product-img {
     width: 80px;
     height: 60px;
     object-fit: cover;
     border-radius: 8px;
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .product-table th {
+    max-width: 100%;
+    height: auto;
+}
+
+.product-table th {
     background-color: #333;
     color: white;
-  }
-  
-  .product-table td {
+}
+
+.product-table td {
     background-color: #f9f9f9;
-  }
-  
-  .no-products {
+}
+
+.no-products {
     text-align: center;
     font-size: 1.2rem;
     color: white;
-  }
-  
-
-@media (max-width: 768px) {
-    .product-table {
-        width: 95vw;
-    }
-
-    .product-table th,
-    .product-table td {
-        font-size: 0.9rem;
-        padding: 10px;
-    }
-
-    .product-table td img {
-        width: 60px;
-        height: 60px;
-    }
 }
 
 .error {
@@ -274,90 +230,92 @@ margin: 10px;
     color: #F46036;
 }
 
-.qr{
+.qr {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    text-align: center
-}
-.gen{
-    margin:0 600px;
+    text-align: center;
 }
 
-.gen button{
+.gen {
+    margin: 0 600px;
+}
+
+.gen button {
     background-color: #F46036;
     border-radius: 10px;
-    height: 5vh; 
-     width: 100%;
-     font-size: bold;
+    height: 5vh;
+    width: 100%;
+    font-size: bold;
     display: flex;
-    justify-content: centre; 
-    align-items: center; 
-
+    justify-content: center;
+    align-items: center;
 }
 
-#qrCodeEl{
+#qrCodeEl {
     margin: 15px 0px;
 }
 
-.name{
+.name {
     text-align: center;
 }
+
 .cart-container {
     padding: 20px;
     max-width: 1000px;
     margin: 0 auto;
-  }
-  
-  .cart-title {
+    position: relative;
+}
+
+.cart-title {
     text-align: center;
     font-size: 2rem;
     margin-bottom: 20px;
-  }
-  
-  .empty-cart {
+}
+
+.empty-cart {
     text-align: center;
     font-size: 1.5rem;
     color: #777;
-  }
-  
-  .cart-table {
+}
+
+.cart-table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 30px;
-  }
-  
-  .cart-table th, .cart-table td {
+}
+
+.cart-table th, .cart-table td {
     padding: 12px;
     text-align: center;
     border: 1px solid #ddd;
-  }
-  
-  .cart-table th {
+}
+
+.cart-table th {
     background-color: #f4f4f4;
-  }
-  
-  .product-name {
+}
+
+.product-name {
     font-weight: bold;
-  }
-  
-  .product-price, .total-price {
+}
+
+.product-price, .total-price {
     color: #333;
-  }
-  
-  .quantity {
+}
+
+.quantity {
     width: 120px;
-  }
-  
-  .quantity-input {
+}
+
+.quantity-input {
     width: 50px;
     padding: 5px;
     text-align: center;
     border: 1px solid #ddd;
-  }
-  
-  .order-btn,.remove-btn button {
+}
+
+.order-btn, .remove-btn button {
     background-color: #ff4c4c;
     color: white;
     border: none;
@@ -365,38 +323,34 @@ margin: 10px;
     cursor: pointer;
     border-radius: 5px;
     font-size: 0.9rem;
-  }
-  
-  .order-btn,.remove-btn button:hover {
+}
+
+.order-btn:hover, .remove-btn button:hover {
     background-color: #e60000;
-  }
-  
-  .total-price {
+}
+
+.total-price {
     color: #007700;
     font-weight: bold;
-  }
-  
-  .cart-summary {
+}
+
+.cart-summary {
     text-align: center;
     margin-top: 20px;
-  }
-  
-  .total-price-label {
+}
+
+.total-price-label {
     font-size: 1.5rem;
     font-weight: bold;
     color: #007700;
-  }
-  
-  .cart {
+}
+
+.cart {
     color: rgb(197, 179, 179);
     padding-left: 8px;
-  }
+}
 
-  .cart-container {
-    position: relative;
-  }
-  
-  .order-details-form {
+.order-details-form {
     position: fixed;
     top: 0;
     left: 0;
@@ -406,32 +360,31 @@ margin: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .form-container {
+}
+
+.form-container {
     background: #fff;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 100%;
     max-width: 400px;
-  }
-  
-  .order-details-form form label {
+}
+
+.order-details-form form label {
     display: block;
     margin-bottom: 10px;
-  }
-  
-  .order-details-form input,
-  select {
+}
+
+.order-details-form input, select {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 4px;
-  }
-  
-  .order-details-form button {
+}
+
+.order-details-form button {
     padding: 10px 15px;
     background-color: #4CAF50;
     color: white;
@@ -439,72 +392,152 @@ margin: 10px;
     cursor: pointer;
     border-radius: 4px;
     width: 100%;
-  }
-  
-  .button:hover {
-    background-color: #45a049;
-  }
+}
 
-  .container {
+.button:hover {
+    background-color: #45a049;
+}
+
+.container {
     padding: 20px;
     max-width: 1200px;
     margin: auto;
-  }
-  
-  .title {
+}
+
+.title {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
-  }
-  
-  .table-container {
+}
+
+.table-container {
     overflow-x: auto;
-  }
-  
-  table {
+}
+
+table {
     width: 100%;
     border-collapse: collapse;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  th, td {
+}
+
+th, td {
     border: 1px solid #ccc;
     padding: 12px;
     text-align: left;
-  }
-  
-  th {
+}
+
+th {
     background-color: #f4f4f4;
-  }
-  
-  .button-complete {
+}
+
+.button-complete {
     background-color: #28a745;
     color: white;
     padding: 8px 12px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .button-complete:hover {
+}
+
+.button-complete:hover {
     background-color: #218838;
-  }
-  
-  @media (max-width: 768px) {
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-content: center;
+    gap: 20px;
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 1200px;
+}
+
+.card {
+    width: 220px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 10px;
+}
+
+.card-content h3 {
+    margin: 10px 0 5px;
+}
+
+.card-content p {
+    margin: 0 0 10px;
+}
+
+.card-content button {
+    padding: 6px 12px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.card-content button:hover {
+    background-color: #007700;
+}
+
+.menu-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.menu-content {
+  backdrop-filter: blur(5px);
+  padding: 40px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.menu-header h2 {
+    color: rgb(132, 132, 192);
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.menu-container h3 {
+  color: white;
+  margin: 20px 0 10px;
+  font-size: 1.8rem;
+}
+
+@media (max-width: 768px) {
     .product-table {
         width: 95vw;
         font-size: 0.9rem;
     }
 
-    .product-table th,
-    .product-table td {
+    .product-table th, .product-table td {
         font-size: 0.85rem;
         padding: 8px;
     }
 
-    .product-table td img {
-        width: 50px;
-        height: 50px;
+    .product-table td img,
+    .product-img {
+        width: 100%;
+        max-width: 100px;
+        height: auto;
     }
 
     .menu-container h2.name {
@@ -519,8 +552,7 @@ margin: 10px;
         font-size: 0.9rem;
     }
 
-    .cart-table th,
-    .cart-table td {
+    .cart-table th, .cart-table td {
         font-size: 0.85rem;
         padding: 8px;
     }
@@ -534,8 +566,7 @@ margin: 10px;
         max-width: 300px;
     }
 
-    .order-details-form input,
-    select {
+    .order-details-form input, select {
         font-size: 0.9rem;
         padding: 8px;
     }
@@ -543,10 +574,6 @@ margin: 10px;
     .order-details-form button {
         font-size: 0.9rem;
         padding: 8px;
-    }
-
-    .cart-summary {
-        text-align: center;
     }
 
     .total-price-label {
@@ -557,71 +584,69 @@ margin: 10px;
         font-size: 0.9rem;
         padding: 8px 12px;
     }
-}
 
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr); 
-  justify-content: center; 
-  gap: 20px;
-  margin: 20px auto;
-  padding: 20px; 
-  max-width: 1200px;
-}
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 1200px;
+      padding: 10px;
+      box-sizing: border-box;
+  }
 
-
-.card {
-  width: 220px; 
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  overflow: hidden;
-  background-color: #fff;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  .card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .card-img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
 }
 
 .card-content {
-  padding: 10px;
+    padding: 12px;
 }
 
-.card-content h3 {
-  margin: 10px 0 5px;
+.card-content h4 {
+    margin: 10px 0 5px;
 }
 
 .card-content p {
-  margin: 0 0 10px;
+    margin: 0 0 10px;
+    color: #444;
 }
 
 .card-content button {
-  padding: 6px 12px;
-  border: none;
-  background-color: #28a745;
-  color: white;
-  border-radius: 4px;
-  cursor: pointer;
+    padding: 6px 12px;
+    border: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.card-content button:hover{
-  background-color: #007700;
+.card-content button:hover {
+    background-color: #007700;
 }
 
-.menu-header {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-.menu-header h2{
-  color: rgb(132, 132, 192);
-}
-.menu-container h3{
-  color: whitesmoke;
+.cart-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #F46036;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
+.cart-button:hover {
+    background-color: #d34928;
+}
+}
